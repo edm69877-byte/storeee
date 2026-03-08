@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Atelier Floral - Artisan Fleuriste Paris</title>
+    <meta name="description" content="Créations florales uniques et bouquets sur-mesure par votre artisan fleuriste à Paris.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Preload for speed -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1562690868-60bbe7293e94?auto=format&fit=crop&w=1920&q=80">
+    <style>
+        :root {
+            --color-pink: #F8E8E8;
+            --color-burgundy: #8B1A3A;
+            --color-white-off: #FDFAF7;
+            --color-gold: #C9A96E;
+            --color-text: #2c2c2c;
+            --shadow-soft: 0 10px 30px rgba(139, 26, 58, 0.08);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--color-white-off);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-burgundy);
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--color-burgundy);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 26, 58, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #6d142d;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 26, 58, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--color-burgundy);
+        }
+
+        .btn-gold {
+            background-color: var(--color-gold);
+            color: white;
+            box-shadow: 0 4px 15px rgba(201, 169, 110, 0.3);
+        }
+        
+        .btn-gold:hover {
+            background-color: #b08d55;
+            transform: translateY(-2px);
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 1. Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(253, 250, 247, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-burgundy);
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+            fill: var(--color-burgundy);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a:not(.btn) {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-text);
+            position: relative;
+        }
+
+        .nav-links a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:not(.btn):hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--color-burgundy);
+            cursor: pointer;
+        }
+
+        /* 2. Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2b0a14;
+            /* Reverted to static image for instant load */
+            background-image: url('https://images.unsplash.com/photo-1562690868-60bbe7293e94?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h2 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            font-style: italic;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* 3. Collections */
+        .collections {
+            background-color: var(--color-white-off);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-gold);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .collection-card {
+            position: relative;
+            height: 600px;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            cursor: pointer;
+            background-color: #eee;
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .collection-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(139, 26, 58, 0.8), rgba(139, 26, 58, 0.1));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .collection-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .collection-card:hover .collection-overlay {
+            opacity: 1;
+        }
+
+        .card-content h3 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .card-content p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .card-label {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            transition: opacity 0.3s;
+            font-style: italic;
+        }
+
+        .collection-card:hover .card-label {
+            opacity: 0;
+        }
+
+        /* 4. Storytelling */
+        .storytelling {
+            background-color: var(--color-burgundy);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .story-content h2 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .story-content p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 50px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .florist-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--color-gold);
+            object-fit: cover;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background-color: #f8e8e8;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 1;
+        }
+
+        /* 5. Order Form */
+        .order-section {
+            background-color: var(--color-pink);
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 60px;
+            border-radius: 5px;
+            box-shadow: var(--shadow-soft);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--color-burgundy);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 18px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: #fdfdfd;
+            color: #333;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-burgundy);
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(139, 26, 58, 0.05);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* 6. Reviews */
+        .reviews {
+            background-color: var(--color-white-off);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            border-top: 4px solid var(--color-gold);
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .client-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: -80px auto 20px;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stars {
+            color: var(--color-gold);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .client-name {
+            font-weight: 700;
+            color: var(--color-burgundy);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .client-location {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        /* 7. Footer */
+        footer {
+            background-color: #2b0a14;
+            color: white;
+            padding: 80px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: var(--color-gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #ccc;
+            margin-bottom: 12px;
+            display: block;
+            font-weight: 300;
+            font-size: 0.95rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--color-gold);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            border-color: var(--color-gold);
+            color: var(--color-gold);
+            background-color: rgba(201, 169, 110, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .map-container {
+            border-radius: 5px;
+            overflow: hidden;
+            height: 200px;
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Conversion Section */
+        .conversion-footer {
+            background-color: var(--color-white-off);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--color-text);
+            border-top: 5px solid var(--color-gold);
+        }
+        
+        .conversion-footer h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--color-burgundy);
+        }
+        
+        .hidden-email {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--color-burgundy);
+            padding: 15px;
+            border: 2px dashed var(--color-burgundy);
+            display: inline-block;
+        }
+
+        .copyright {
+            background-color: #1a050b;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-top: 5px solid var(--color-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero-content h2 { font-size: 3rem; }
+            .form-row { flex-direction: column; gap: 0; }
+            .form-container { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,2C10,2 8,3 8,5C8,7 10,8 12,8C14,8 16,7 16,5C16,3 14,2 12,2M12,22C12,22 10,18 9,15C9,15 5,16 4,12C3,8 7,6 8,9C8,9 10,11 11,12C11,12 11,13 12,13C13,13 13,12 13,12C14,11 16,9 16,9C17,6 21,8 20,12C19,16 15,15 15,15C14,18 12,22 12,22Z" />
+                    </svg>
+                    L'Atelier Floral
+                </a>
+                <div class="nav-links">
+                    <a href="#accueil">Accueil</a>
+                    <a href="#collections">Collections</a>
+                    <a href="#atelier">L'Atelier</a>
+                    <a href="#avis">Avis</a>
+                    <a href="#contact" class="btn btn-primary">Commander</a>
+                </div>
+                <div class="mobile-menu-btn">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 2. Hero -->
+    <section id="accueil" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content fade-in visible">
+            <h2>Des fleurs qui racontent votre histoire</h2>
+            <p>ARTISAN FLEURISTE PASSIONNÉ AU CŒUR DE PARIS</p>
+            <br>
+            <a href="gallery.html" class="btn btn-outline" style="margin-top: 20px;">Découvrir nos bouquets</a>
+        </div>
+    </section>
+
+    <!-- 3. Collections -->
+    <section id="collections" class="section-padding collections">
+        <div class="container">
+            <h2 class="section-title fade-in">Nos Collections</h2>
+            <div class="cards-grid">
+                <div class="collection-card fade-in" onclick="window.location.href='gallery.html'">
+                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80" alt="Esprit Champêtre">
+                    <div class="card-label">Esprit Champêtre</div>
+                    <div class="collection-overlay">
+                        <div class="card-content">
+                            <h3>Esprit Champêtre</h3>
+                            <p>La beauté sauvage des fleurs des champs.</p>
+                            <a href="gallery.html" class="btn btn-outline">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-card fade-in" onclick="window.location.href='gallery.html'">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80" alt="Romance Éternelle">
+                    <div class="card-label">Romance Éternelle</div>
+                    <div class="collection-overlay">
+                        <div class="card-content">
+                            <h3>Romance Éternelle</h3>
+                            <p>Une ode à l'amour avec nos plus belles roses.</p>
+                            <a href="gallery.html" class="btn btn-outline">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-card fade-in" onclick="window.location.href='gallery.html'">
+                    <img src="https://images.unsplash.com/photo-1470509037663-253afd7f0f51?auto=format&fit=crop&w=800&q=80" alt="Jardin d'Intérieur">
+                    <div class="card-label">Jardin d'Intérieur</div>
+                    <div class="collection-overlay">
+                        <div class="card-content">
+                            <h3>Jardin d'Intérieur</h3>
+                            <p>Apportez une touche de nature chez vous.</p>
+                            <a href="gallery.html" class="btn btn-outline">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Storytelling -->
+    <section id="atelier" class="section-padding storytelling">
+        <div class="bg-pattern"></div>
+        <div class="container story-content fade-in">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80" alt="Fleuriste" class="florist-img">
+            <h2>L'âme de l'artisanat</h2>
+            <p>"Artisan fleuriste depuis 15 ans, je compose chaque bouquet à la main avec des fleurs de saison sélectionnées avec soin."</p>
+            <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--color-gold);">— Camille, votre fleuriste</div>
+        </div>
+    </section>
+
+    <!-- 5. Form -->
+    <section id="contact" class="section-padding order-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Commander votre création</h2>
+            <div class="form-container fade-in">
+                <form id="orderForm">
+                    <div class="form-row">
+                        <div class="form-col form-group"><label>Prénom</label><input type="text" required></div>
+                        <div class="form-col form-group"><label>Nom</label><input type="text" required></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea placeholder="Vos préférences..."></textarea>
+                    </div>
+                    <div style="text-align: center; margin-top: 40px;">
+                        <button type="submit" class="btn btn-primary">Envoyer ma commande 🌸</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Avis Clients -->
+    <section id="avis" class="section-padding reviews">
+        <div class="container">
+            <h2 class="section-title fade-in">Ce qu'ils disent de nous</h2>
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Client 1" class="client-avatar">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Un bouquet absolument magnifique pour l'anniversaire de ma mère. Les pivoines étaient d'une fraîcheur incroyable. Merci pour ce service 5 étoiles !"</p>
+                    <div class="client-name">Sophie Martin</div>
+                    <div class="client-location">Paris 11e</div>
+                </div>
+                <!-- Review 2 -->
+                <div class="review-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Client 2" class="client-avatar">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"J'ai commandé à la dernière minute pour une surprise, l'équipe a été super réactive. Le bouquet 'Esprit Champêtre' a fait sensation."</p>
+                    <div class="client-name">Thomas Dubois</div>
+                    <div class="client-location">Paris 4e</div>
+                </div>
+                <!-- Review 3 -->
+                <div class="review-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Client 3" class="client-avatar">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Enfin un fleuriste qui a du goût ! Les compositions sont modernes, élégantes et tiennent longtemps. Je recommande les yeux fermés."</p>
+                    <div class="client-name">Camille Laurent</div>
+                    <div class="client-location">Vincennes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>L'Atelier Floral</h4>
+                    <p>Votre artisan fleuriste. <br>(Texte personnalisable)</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="https://www.facebook.com/" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact & Horaires</h4>
+                    <p>📍 15 Avenue des Champs-Élysées, Paris (Adresse Exemple)</p>
+                    <p>📞 01 00 00 00 00</p>
+                    <br>
+                    <p>Mardi - Samedi : 9h30 - 19h30 (Exemple)</p>
+                    <p>Lundi : Fermé</p>
+                </div>
+                <div class="footer-col">
+                    <div class="map-container">
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80" style="width:100%; height:100%; object-fit:cover; opacity: 0.6;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="conversion-footer">
+            <h3>Ce site vous plaît ?</h3>
+            <button class="btn btn-gold" onclick="revealContact()">Je veux ce site pour ma boutique</button>
+            <br>
+            <div id="contactEmail" class="hidden-email" style="display:none; margin-top:20px; font-weight:bold; color:var(--color-burgundy); border:2px dashed; padding:10px;">
+                Contact : adryen.digital@gmail.com
+            </div>
+        </div>
+        <div class="copyright"><p>&copy; 2026 L'Atelier Floral. Démo professionnelle.</p></div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="demoModal">
+        <div class="modal-content">
+            <h3>Mode Démonstration</h3>
+            <p>Ceci est un site de démonstration. Sur votre vrai site, cela ouvrira WhatsApp.</p>
+            <br>
+            <button class="btn btn-primary" onclick="closeModal()">Fermer</button>
+        </div>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        document.getElementById('orderForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('demoModal').style.display = 'flex';
+        });
+        function closeModal() { document.getElementById('demoModal').style.display = 'none'; }
+        function revealContact() { document.getElementById('contactEmail').style.display = 'inline-block'; }
+    </script>
+</body>
+</html>
