@@ -6,14 +6,15 @@
     <title>Demande de Devis | L'Atelier Floral Paris</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --bordeaux: #8B1A1A; --doré: #D4AF37; --rose-clair: #FFF0F0; --texte: #2D2D2D; --blanc: #FFFFFF; }
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        :root { --bordeaux: #8B1A1A; --doré: #D4AF37; --rose-clair: #FFF0F0; --texte: #2D2D2D; --blanc: #FFFFFF; --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--rose-clair); color: var(--texte); line-height: 1.6; }
-        #cursor-flower { position: fixed; width: 20px; height: 20px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238B1A1A'%3E%3Cpath d='M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z'/%3E%3C/svg%3E") no-repeat center; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); }
         
         header { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; background: var(--blanc); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .logo { display: flex; align-items: center; gap: 10px; font-size: 1.4rem; font-weight: 700; color: var(--bordeaux); text-decoration: none; font-family: 'Playfair Display', serif; }
-        .logo svg { width: 30px; }
+        .logo svg { width: 30px; fill: var(--bordeaux); }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { text-decoration: none; color: var(--texte); font-size: 0.9rem; }
 
         .container { max-width: 800px; margin: 60px auto; background: var(--blanc); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         h1 { font-family: 'Playfair Display', serif; color: var(--bordeaux); font-size: 2.5rem; text-align: center; margin-bottom: 10px; }
@@ -21,68 +22,50 @@
 
         .form-group { margin-bottom: 25px; }
         label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; color: var(--bordeaux); }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 1rem; transition: border-color 0.3s; }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--doré); }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 1rem; }
 
-        .btn-submit { display: block; width: 100%; padding: 15px; background: var(--bordeaux); color: var(--blanc); border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; position: relative; overflow: hidden; }
-        
-        /* --- TOOLTIP --- */
-        .tooltip { position: absolute; background: #333; color: #fff; padding: 10px; border-radius: 5px; font-size: 0.8rem; width: 90%; top: -60px; left: 5%; opacity: 0; visibility: hidden; transition: 0.3s; text-align: center; text-transform: none; letter-spacing: 0; }
-        .btn-submit:hover .tooltip { opacity: 1; visibility: visible; top: -50px; }
+        .btn-submit { display: block; width: 100%; padding: 18px; background: var(--bordeaux); color: var(--blanc); border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { background: #5a1111; }
+
+        /* Modal Démo */
+        #demo-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px); }
+        .modal-content { background: var(--blanc); padding: 40px; border-radius: 15px; max-width: 500px; text-align: center; border-top: 10px solid var(--bordeaux); }
+        .modal-content h2 { color: var(--bordeaux); margin-bottom: 15px; }
+        .modal-content p { margin-bottom: 30px; color: #444; }
+        .btn-close { padding: 12px 40px; background: var(--bordeaux); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; }
 
         footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #888; }
     </style>
 </head>
 <body>
-    <div id="cursor-flower"></div>
     <header>
         <a href="index.html" class="logo">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 12 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
             L'Atelier Floral
         </a>
+        <nav><ul><li><a href="index.html">Accueil</a></li><li><a href="gallery.html">Galerie</a></li><li><a href="devis.html" style="color:var(--bordeaux); font-weight:600;">Sur-Mesure</a></li></ul></nav>
     </header>
 
-    <div class="container">
-        <h1>Votre Projet Floral</h1>
-        <p class="subtitle">Mariage, événement ou abonnement entreprise : racontez-nous votre envie.</p>
+    <div id="demo-modal">
+        <div class="modal-content">
+            <h2>Mode Démo</h2>
+            <p>Sur le site final de votre client, ce formulaire enverrait toutes les informations (nom, date, projet) directement sur son adresse email professionnelle ou son WhatsApp.</p>
+            <button class="btn-close" onclick="document.getElementById('demo-modal').style.display='none'">J'AI COMPRIS</button>
+        </div>
+    </div>
 
-        <form onsubmit="return false;">
-            <div class="form-group">
-                <label>Votre Nom</label>
-                <input type="text" placeholder="Ex: Jean Dupont">
-            </div>
-            <div class="form-group">
-                <label>Type d'événement</label>
-                <select>
-                    <option>Mariage</option>
-                    <option>Événement Professionnel</option>
-                    <option>Anniversaire / Réception</option>
-                    <option>Abonnement Boutique/Bureau</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Date souhaitée</label>
-                <input type="date">
-            </div>
-            <div class="form-group">
-                <label>Votre message</label>
-                <textarea rows="5" placeholder="Dites-nous en plus sur vos fleurs préférées, les couleurs, le lieu..."></textarea>
-            </div>
-            <button class="btn-submit">
-                Envoyer ma demande
-                <div class="tooltip">📝 Sur votre site : vous recevez les demandes de devis directement par email ou WhatsApp.</div>
-            </button>
+    <div class="container">
+        <h1>Demande de Devis</h1>
+        <p class="subtitle">Pour vos mariages, réceptions ou projets sur-mesure.</p>
+
+        <form onsubmit="document.getElementById('demo-modal').style.display='flex'; return false;">
+            <div class="form-group"><label>Nom Complet</label><input type="text" placeholder="Jean Dupont" required></div>
+            <div class="form-group"><label>Type d'événement</label><select><option>Mariage</option><option>Événement Pro</option><option>Anniversaire</option></select></div>
+            <div class="form-group"><label>Votre Message</label><textarea rows="5" placeholder="Détails du projet..." required></textarea></div>
+            <button type="submit" class="btn-submit">Envoyer ma demande</button>
         </form>
     </div>
 
-    <footer>&copy; 2026 L'Atelier Floral - Démo DigitalFR</footer>
-
-    <script>
-        const cursor = document.getElementById('cursor-flower');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-    </script>
+    <footer>&copy; 2026 L'Atelier Floral - Démo par DigitalFR</footer>
 </body>
 </html>
