@@ -23,90 +23,20 @@
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--texte);
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-color: var(--blanc);
-        }
-
-        h1, h2, h3, .playfair {
-            font-family: 'Playfair Display', serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; color: var(--texte); line-height: 1.6; overflow-x: hidden; background-color: var(--blanc); }
+        h1, h2, h3, .playfair { font-family: 'Playfair Display', serif; }
 
         /* --- LOADER --- */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background: var(--blanc);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.8s ease;
-        }
-        .flower-loader {
-            width: 50px;
-            height: 50px;
-            border: 3px solid var(--rose-clair);
-            border-top: 3px solid var(--bordeaux);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+        #loader { position: fixed; inset: 0; background: var(--blanc); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease; }
+        .flower-loader { width: 50px; height: 50px; border: 3px solid var(--rose-clair); border-top: 3px solid var(--bordeaux); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* --- PROGRESS BAR --- */
-        #scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: var(--bordeaux);
-            z-index: 1001;
-            width: 0%;
-        }
-
         /* --- HEADER --- */
-        .top-banner {
-            background: var(--bordeaux);
-            color: var(--blanc);
-            text-align: center;
-            padding: 8px;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            font-weight: 300;
-        }
+        .top-banner { background: var(--bordeaux); color: var(--blanc); text-align: center; padding: 8px; font-size: 0.8rem; letter-spacing: 1px; font-weight: 300; }
+        header { position: sticky; top: 0; width: 100%; padding: 20px 5%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; background: var(--blanc); transition: var(--transition); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
 
-        header {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            padding: 20px 5%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--blanc);
-            transition: var(--transition);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--bordeaux);
-            text-decoration: none;
-        }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.4rem; font-weight: 700; color: var(--bordeaux); text-decoration: none; }
         .logo svg { width: 30px; fill: var(--bordeaux); }
 
         nav ul { display: flex; list-style: none; gap: 30px; }
@@ -114,73 +44,24 @@
         nav a:hover { color: var(--bordeaux); }
 
         /* --- HERO --- */
-        .hero {
-            height: 85vh;
-            position: relative;
-            background: var(--rose-clair);
-            display: flex;
-            align-items: center;
-            padding: 0 10%;
-            overflow: hidden;
-        }
+        .hero { height: 85vh; position: relative; background: var(--rose-clair); display: flex; align-items: center; padding: 0 10%; overflow: hidden; }
         .hero-content { z-index: 2; max-width: 600px; }
         .hero h1 { font-size: 4rem; color: var(--bordeaux); margin-bottom: 20px; line-height: 1.1; }
         .hero p { font-size: 1.1rem; margin-bottom: 30px; color: #555; }
         
-        .hero-img-box {
-            position: absolute;
-            right: 5%;
-            width: 45%;
-            height: 75%;
-            z-index: 1;
-        }
-        .hero-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 5px;
-            box-shadow: 25px 25px 0 var(--doré);
-        }
+        .hero-img-box { position: absolute; right: 5%; width: 45%; height: 75%; z-index: 1; display: flex; justify-content: center; align-items: center; }
+        .hero-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 25px 25px 0 var(--doré); }
 
         /* --- MODAL DEMO --- */
-        #demo-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.85);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-        .modal-content {
-            background: var(--blanc);
-            padding: 40px;
-            border-radius: 15px;
-            max-width: 500px;
-            text-align: center;
-            border-top: 10px solid var(--bordeaux);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        }
+        #demo-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px); }
+        .modal-content { background: var(--blanc); padding: 40px; border-radius: 15px; max-width: 500px; text-align: center; border-top: 10px solid var(--bordeaux); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
         .modal-content h2 { color: var(--bordeaux); margin-bottom: 15px; font-size: 1.8rem; }
         .modal-content p { margin-bottom: 30px; color: #444; font-size: 1rem; line-height: 1.5; }
-        .btn-close {
-            padding: 12px 40px;
-            background: var(--bordeaux);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .btn-close { padding: 12px 40px; background: var(--bordeaux); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
         /* --- SECTIONS --- */
         section { padding: 100px 10%; opacity: 0; transform: translateY(30px); transition: 1s ease; }
         section.visible { opacity: 1; transform: translateY(0); }
-
         .section-title { text-align: center; margin-bottom: 60px; }
         .section-title h2 { font-size: 2.8rem; color: var(--bordeaux); margin-bottom: 10px; }
         .divider { width: 60px; height: 3px; background: var(--doré); margin: 0 auto; }
@@ -189,21 +70,10 @@
         .collections-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .item-card { text-align: center; background: var(--blanc); padding-bottom: 30px; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .item-img { height: 450px; overflow: hidden; margin-bottom: 25px; }
-        .item-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; cursor: zoom-in; }
+        .item-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
         .item-card:hover img { transform: scale(1.08); }
-        
         .price { color: var(--doré); font-weight: 600; font-size: 1.2rem; margin-bottom: 20px; }
-        .btn-order {
-            padding: 12px 30px;
-            background: var(--bordeaux);
-            color: var(--blanc);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .btn-order:hover { background: #5a1111; }
+        .btn-order { padding: 12px 30px; background: var(--bordeaux); color: var(--blanc); border: none; border-radius: 5px; cursor: pointer; font-weight: 600; transition: 0.3s; }
 
         /* --- STATS --- */
         .stats-bar { background: var(--bordeaux); color: var(--blanc); display: flex; justify-content: space-around; flex-wrap: wrap; padding: 60px 10%; text-align: center; gap: 30px; }
@@ -211,7 +81,7 @@
         .stat-item p { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
 
         /* --- REVIEWS --- */
-        .reviews-slider { max-width: 800px; margin: 0 auto; text-align: center; overflow: hidden; position: relative; height: 300px; }
+        .reviews-slider { max-width: 800px; margin: 0 auto; text-align: center; position: relative; height: 250px; }
         .review-slide { position: absolute; inset: 0; opacity: 0; transition: 1s; padding: 40px; }
         .review-slide.active { opacity: 1; }
         .stars { color: var(--doré); margin-bottom: 20px; font-size: 1.2rem; }
@@ -232,7 +102,6 @@
             .hero { height: auto; padding: 60px 5%; flex-direction: column; text-align: center; }
             .hero h1 { font-size: 2.5rem; }
             .hero-img-box { position: static; width: 100%; height: 350px; margin-top: 40px; }
-            .hero-img-box img { box-shadow: 15px 15px 0 var(--doré); }
             nav { display: none; }
         }
     </style>
@@ -240,151 +109,93 @@
 <body>
 
     <div id="loader"><div class="flower-loader"></div></div>
-    <div id="scroll-progress"></div>
-
-    <div class="top-banner">🚚 Livraison Paris & banlieue · Commande avant 11h = livraison le jour même</div>
 
     <header>
         <a href="index.html" class="logo">
             <svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 12 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
             L'Atelier Floral
         </a>
-        <nav>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="gallery.html">Galerie</a></li>
-                <li><a href="devis.html">Sur-Mesure</a></li>
-            </ul>
-        </nav>
+        <nav><ul><li><a href="index.html">Accueil</a></li><li><a href="gallery.html">Galerie</a></li><li><a href="devis.html">Sur-Mesure</a></li></ul></nav>
     </header>
 
     <div id="demo-modal">
         <div class="modal-content">
-            <h2>Mode Démo Activé</h2>
+            <h2>Mode Démo</h2>
             <p id="demo-text"></p>
-            <button class="btn-close" onclick="closeDemo()">J'ai compris</button>
+            <button class="btn-close" onclick="document.getElementById('demo-modal').style.display='none'">J'AI COMPRIS</button>
         </div>
     </div>
 
-    <div id="wa-fixed" onclick="showDemo('ACTION WHATSAPP : Sur votre site, vos clients tombent directement sur votre discussion avec un message pré-rempli pour commander.')">
+    <div id="wa-fixed" onclick="showDemo('ACTION WHATSAPP : Vos clients vous envoient un message instantané pour commander sans quitter leur téléphone.')">
         <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.438 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </div>
 
-    <section class="hero" style="opacity:1; transform:none; padding:0 10%">
+    <section class="hero" style="opacity:1; transform:none;">
         <div class="hero-content">
             <h1>L'Art Floral à son Apogée</h1>
-            <p>Découvrez nos créations exclusives de roses éternelles et de bouquets de saison pour sublimer votre intérieur.</p>
-            <button class="btn-order" onclick="showDemo('Sur votre site, ce bouton redirigerait vers votre catalogue complet ou vos produits phares.')">DÉCOUVRIR</button>
+            <p>Découvrez nos créations exclusives de roses d'exception et de bouquets de saison pour sublimer votre intérieur.</p>
+            <button class="btn-order" onclick="showDemo('Sur votre site, ce bouton redirigerait vers votre catalogue complet.')">DÉCOUVRIR</button>
         </div>
         <div class="hero-img-box">
-            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80" alt="Rose Unique">
+            <!-- Image de la rose magnifique suggérée -->
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80" alt="Magnifique Rose">
         </div>
     </section>
 
     <div class="stats-bar">
         <div class="stat-item"><h3>12</h3><p>Ans d'Expérience</p></div>
-        <div class="stat-item"><h3>3 200</h3><p>Bouquets Créés</p></div>
-        <div class="stat-item"><h3>98%</h3><p>Clients Satisfaits</p></div>
-        <div class="stat-item"><h3>J+0</h3><p>Livraison Rapide</p></div>
+        <div class="stat-item"><h3>4.9/5</h3><p>Note Google Maps</p></div>
+        <div class="stat-item"><h3>J+0</h3><p>Livraison Paris</p></div>
     </div>
 
     <section id="collections">
-        <div class="section-title">
-            <h2>Les Incontournables</h2>
-            <div class="divider"></div>
-        </div>
+        <div class="section-title"><h2>Nos Signatures</h2><div class="divider"></div></div>
         <div class="collections-grid">
             <div class="item-card">
-                <div class="item-img"><img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?auto=format&fit=crop&w=600&q=80" alt="Bouquet Blanc"></div>
-                <h3>Pureté Blanche</h3>
-                <p class="price">45,00 €</p>
-                <button class="btn-order" onclick="showDemo('ACTION COMMANDE : Le client est mis en relation directe avec vous pour valider sa commande de ce bouquet.')">COMMANDER</button>
+                <div class="item-img"><img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?auto=format&fit=crop&w=600&q=80"></div>
+                <h3>L'Innocence Blanche</h3><p class="price">45,00 €</p>
+                <button class="btn-order" onclick="showDemo('COMMANDE : Le client valide son choix et vous recevez une notification immédiate.')">COMMANDER</button>
             </div>
             <div class="item-card">
-                <div class="item-img"><img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80" alt="Bouquet Rouge"></div>
-                <h3>Passion Intense</h3>
-                <p class="price">65,00 €</p>
-                <button class="btn-order" onclick="showDemo('Sur votre site, ce bouton déclencherait l\'ouverture de WhatsApp ou du panier d\'achat.')">COMMANDER</button>
-            </div>
-            <div class="item-card">
-                <div class="item-img"><img src="https://images.unsplash.com/photo-1591880911020-d349346fe35a?auto=format&fit=crop&w=600&q=80" alt="Bouquet Rose"></div>
-                <h3>Éclat Pastel</h3>
-                <p class="price">55,00 €</p>
-                <button class="btn-order" onclick="showDemo('COMMANDER : Vous recevez les coordonnées du client et le modèle choisi instantanément.')">COMMANDER</button>
+                <div class="item-img"><img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80"></div>
+                <h3>Passion Velours</h3><p class="price">65,00 €</p>
+                <button class="btn-order" onclick="showDemo('ACTION : Ce bouton déclenche l\'ouverture de WhatsApp ou du panier.')">COMMANDER</button>
             </div>
         </div>
     </section>
 
     <section id="reviews">
-        <div class="section-title"><h2>L'âme de l'artisanat</h2><div class="divider"></div></div>
+        <div class="section-title"><h2>Avis de nos Clients</h2><div class="divider"></div></div>
         <div class="reviews-slider">
             <div class="review-slide active">
                 <div class="stars">★★★★★</div>
-                <p class="review-text">"Les fleurs sont d'une fraîcheur incroyable. Mon bouquet a tenu plus de 10 jours. Un vrai travail d'orfèvre."</p>
-                <p><strong>Marie L.</strong> - Paris 8ème</p>
+                <p class="review-text">"Les bouquets sont sublimes et tiennent vraiment longtemps. Un service de luxe à Paris !"</p>
+                <p><strong>Marie D.</strong> - Paris 16e</p>
             </div>
             <div class="review-slide">
                 <div class="stars">★★★★★</div>
-                <p class="review-text">"La commande par WhatsApp est super simple. Livraison ponctuelle et bouquet magnifique. Merci Adrien !"</p>
-                <p><strong>Julien R.</strong> - Neuilly</p>
+                <p class="review-text">"Commandé le matin, livré à 14h. Les roses sont d'une qualité exceptionnelle."</p>
+                <p><strong>Thomas L.</strong> - Neuilly</p>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-col">
-                <h4>L'ATELIER FLORAL</h4>
-                <p>Votre artisan fleuriste de prestige au cœur du 17ème arrondissement de Paris. Créativité et fraîcheur garantie.</p>
-            </div>
-            <div class="footer-col">
-                <h4>HORAIRES</h4>
-                <p><span class="status-dot"></span>Ouvert maintenant</p>
-                <p>Lun - Sam : 09:00 - 19:30</p>
-                <p>Dimanche : Fermé</p>
-            </div>
-            <div class="footer-col">
-                <h4>CONTACT</h4>
-                <p>12 Avenue des Ternes, 75017 Paris</p>
-                <p>01 45 67 89 10</p>
-            </div>
+            <div class="footer-col"><h4>L'ATELIER FLORAL</h4><p>Artisan créateur à Paris. Excellence et fraîcheur garantie.</p></div>
+            <div class="footer-col"><h4>HORAIRES</h4><p><span class="status-dot"></span>Ouvert maintenant</p><p>Lun-Sam : 9h-19h30</p></div>
+            <div class="footer-col"><h4>CONTACT</h4><p>12 Avenue des Ternes, 75017 Paris</p><p>01 45 67 89 10</p></div>
         </div>
-        <div class="copyright">&copy; 2026 L'Atelier Floral. Démo réalisée par DigitalFR.</div>
+        <div class="copyright">&copy; 2026 L'Atelier Floral. Réalisé par DigitalFR.</div>
     </footer>
 
     <script>
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(() => document.getElementById('loader').style.display = 'none', 800);
-            }, 800);
-        });
-
-        window.onscroll = () => {
-            const winScroll = document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            document.getElementById('scroll-progress').style.width = (winScroll / height * 100) + "%";
-            
-            document.querySelectorAll('section').forEach(sec => {
-                const top = window.scrollY;
-                if (top >= sec.offsetTop - 700) sec.classList.add('visible');
-            });
-        };
-
-        function showDemo(text) {
-            document.getElementById('demo-text').innerText = text;
-            document.getElementById('demo-modal').style.display = 'flex';
-        }
-        function closeDemo() { document.getElementById('demo-modal').style.display = 'none'; }
-
-        // Review Slider
-        let current = 0;
-        const slides = document.querySelectorAll('.review-slide');
-        setInterval(() => {
-            slides[current].classList.remove('active');
-            current = (current + 1) % slides.length;
-            slides[current].classList.add('active');
-        }, 4000);
+        window.onload = () => { document.getElementById('loader').style.opacity = '0'; setTimeout(() => document.getElementById('loader').style.display = 'none', 800); };
+        window.onscroll = () => { document.querySelectorAll('section').forEach(sec => { if (window.scrollY >= sec.offsetTop - 700) sec.classList.add('visible'); }); };
+        function showDemo(t) { document.getElementById('demo-text').innerText = t; document.getElementById('demo-modal').style.display = 'flex'; }
+        
+        let c = 0; const s = document.querySelectorAll('.review-slide');
+        setInterval(() => { s[c].classList.remove('active'); c = (c + 1) % s.length; s[c].classList.add('active'); }, 4000);
     </script>
 </body>
 </html>
