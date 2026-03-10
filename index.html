@@ -3,199 +3,1154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Atelier Floral | Artisan Fleuriste Paris - Démo DigitalFR</title>
-    
-    <!-- Meta Tags -->
-    <meta property="og:title" content="L'Atelier Floral - Site Démo Premium">
-    <meta property="og:description" content="Découvrez l'excellence digitale pour votre boutique avec DigitalFR.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1562690868-60bbe7293e94?auto=format&fit=crop&w=1200&q=80">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-
+    <title>L'Atelier Floral | Artisan Fleuriste Parisien d'Exception</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bordeaux: #8B1A1A;
-            --doré: #D4AF37;
-            --rose-clair: #FFF0F0;
-            --texte: #2D2D2D;
-            --blanc: #FFFFFF;
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --bordeaux: #6B1212;
+            --bordeaux-hover: #4A0E0E;
+            --rose: #F5E6E8;
+            --blanc-casse: #FAFAF8;
+            --dore: #C9A84C;
+            --noir: #0D0D0D;
+            --transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            --shadow-subtile: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; color: var(--texte); line-height: 1.6; overflow-x: hidden; background-color: var(--blanc); }
-        h1, h2, h3, .playfair { font-family: 'Playfair Display', serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
 
-        /* --- LOADER --- */
-        #loader { position: fixed; inset: 0; background: var(--blanc); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease; }
-        .flower-loader { width: 50px; height: 50px; border: 3px solid var(--rose-clair); border-top: 3px solid var(--bordeaux); border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: white;
+            color: var(--noir);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-        /* --- HEADER --- */
-        .top-banner { background: var(--bordeaux); color: var(--blanc); text-align: center; padding: 8px; font-size: 0.8rem; letter-spacing: 1px; font-weight: 300; }
-        header { position: sticky; top: 0; width: 100%; padding: 20px 5%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; background: var(--blanc); transition: var(--transition); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h1, h2, h3, .logo, .nav-item {
+            font-family: 'Cormorant Garamond', serif;
+        }
 
-        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.4rem; font-weight: 700; color: var(--bordeaux); text-decoration: none; }
-        .logo svg { width: 30px; fill: var(--bordeaux); }
+        /* Loader */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--noir);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
 
-        nav ul { display: flex; list-style: none; gap: 30px; }
-        nav a { text-decoration: none; color: var(--texte); font-weight: 400; font-size: 0.9rem; transition: var(--transition); }
-        nav a:hover { color: var(--bordeaux); }
+        .loader-initials {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 80px;
+            color: var(--dore);
+            letter-spacing: 10px;
+            animation: pulse-gold 1.5s infinite alternate;
+        }
 
-        /* --- HERO --- */
-        .hero { height: 85vh; position: relative; background: var(--rose-clair); display: flex; align-items: center; padding: 0 10%; overflow: hidden; }
-        .hero-content { z-index: 2; max-width: 600px; }
-        .hero h1 { font-size: 4rem; color: var(--bordeaux); margin-bottom: 20px; line-height: 1.1; }
-        .hero p { font-size: 1.1rem; margin-bottom: 30px; color: #555; }
+        @keyframes pulse-gold {
+            from { opacity: 0.3; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            z-index: 10001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--bordeaux);
+            width: 0%;
+        }
+
+        /* Tooltip Global */
+        .tooltip {
+            position: absolute;
+            background: var(--bordeaux-hover);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            z-index: 1000;
+            background: transparent;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            position: fixed;
+            background: white;
+            box-shadow: var(--shadow-subtile);
+        }
+
+        .top-banner {
+            background: var(--bordeaux);
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .top-banner span { color: var(--dore); font-weight: 500; }
+
+        .header-main {
+            padding: 30px 0 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 42px;
+            color: var(--noir);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 15%;
+            width: 70%;
+            height: 1px;
+            background: var(--dore);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--noir);
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .nav-item:hover { color: var(--bordeaux); }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .hero-slider {
+            height: 100%;
+            width: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active { opacity: 1; animation: kenburns 8s linear forwards; }
+
+        @keyframes kenburns {
+            from { transform: scale(1); }
+            to { transform: scale(1.08); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 100px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 72px;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 13px;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--bordeaux);
+            color: white;
+        }
+
+        .btn-primary:hover { background: var(--bordeaux-hover); }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .hero-dots {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+        }
+
+        .dot.active { background: var(--dore); }
+
+        /* Common Styles */
+        section { padding: 120px 5%; opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        section.reveal { opacity: 1; transform: translateY(0); }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 60px;
+            position: relative;
+            font-weight: 300;
+        }
+
+        /* Collections */
+        .collections-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            height: 800px;
+        }
+
+        .col-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .col-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .col-card:hover img { transform: scale(1.05); }
+
+        .col-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(107, 18, 18, 0);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s;
+            color: white;
+        }
+
+        .col-card:hover .col-overlay { background: rgba(107, 18, 18, 0.7); }
+
+        .col-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .col-btn {
+            padding: 12px 30px;
+            border: 1px solid white;
+            color: white;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.5s;
+        }
+
+        .col-card:hover .col-btn { opacity: 1; transform: translateY(0); }
+
+        .large { grid-row: span 2; }
+
+        .ribbon {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--dore);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        /* Avant / Après */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .comp-card {
+            padding: 60px;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .comp-before { background: #f4f4f4; color: #666; }
+        .comp-after { background: var(--rose); border: 1px solid var(--bordeaux); }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .badge-red { background: #E74C3C; }
+        .badge-green { background: #27AE60; }
+
+        .comp-title { font-size: 28px; margin-bottom: 30px; color: var(--noir); }
+        .comp-list { list-style: none; }
+        .comp-list li { margin-bottom: 15px; font-size: 16px; display: flex; align-items: center; gap: 10px; }
+
+        .wix-mockup {
+            background: white;
+            height: 200px;
+            border: 1px solid #ddd;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .mockup-header { height: 20px; background: #eee; margin-bottom: 10px; width: 60%; }
+        .mockup-hero { flex-grow: 1; background: #fafafa; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #ccc; }
+
+        /* Boutique */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            position: relative;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(201, 168, 76, 0.15);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 25px 0;
+            text-align: center;
+        }
+
+        .p-name { font-size: 24px; margin-bottom: 5px; }
+        .p-desc { font-size: 14px; color: #888; margin-bottom: 10px; }
+        .p-price { color: var(--dore); font-weight: 600; font-size: 18px; }
+
+        .product-hover-btn {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            width: 100%;
+            background: var(--bordeaux);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            transition: 0.4s;
+            cursor: not-allowed;
+        }
+
+        .product-card:hover .product-hover-btn { bottom: 0; }
+
+        .ribbon-bordeaux { background: var(--bordeaux); }
+
+        /* Stats */
+        .stats-section {
+            background: var(--bordeaux);
+            color: white;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+            padding: 80px 5%;
+        }
+
+        .stat-item h3 { font-size: 64px; color: var(--dore); margin-bottom: 5px; }
+        .stat-item p { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
+
+        /* Histoire */
+        .history-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .history-img { width: 100%; height: 600px; object-fit: cover; }
+
+        .history-text {
+            padding-left: 40px;
+            border-left: 1px solid var(--dore);
+        }
+
+        .history-text p { font-size: 18px; line-height: 1.8; color: #444; margin-bottom: 30px; font-style: italic; }
+        .signature { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--bordeaux); font-style: italic; }
+
+        /* Avis */
+        .reviews-section { background: #FAF7F2; text-align: center; overflow: hidden; }
         
-        .hero-img-box { position: absolute; right: 5%; width: 45%; height: 75%; z-index: 1; display: flex; justify-content: center; align-items: center; }
-        .hero-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 25px 25px 0 var(--doré); }
-
-        /* --- MODAL DEMO --- */
-        #demo-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px); }
-        .modal-content { background: var(--blanc); padding: 40px; border-radius: 15px; max-width: 500px; text-align: center; border-top: 10px solid var(--bordeaux); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        .modal-content h2 { color: var(--bordeaux); margin-bottom: 15px; font-size: 1.8rem; }
-        .modal-content p { margin-bottom: 30px; color: #444; font-size: 1rem; line-height: 1.5; }
-        .btn-close { padding: 12px 40px; background: var(--bordeaux); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* --- SECTIONS --- */
-        section { padding: 100px 10%; opacity: 0; transform: translateY(30px); transition: 1s ease; }
-        section.visible { opacity: 1; transform: translateY(0); }
-        .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title h2 { font-size: 2.8rem; color: var(--bordeaux); margin-bottom: 10px; }
-        .divider { width: 60px; height: 3px; background: var(--doré); margin: 0 auto; }
-
-        /* --- GRID --- */
-        .collections-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .item-card { text-align: center; background: var(--blanc); padding-bottom: 30px; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .item-img { height: 450px; overflow: hidden; margin-bottom: 25px; }
-        .item-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
-        .item-card:hover img { transform: scale(1.08); }
-        .price { color: var(--doré); font-weight: 600; font-size: 1.2rem; margin-bottom: 20px; }
-        .btn-order { padding: 12px 30px; background: var(--bordeaux); color: var(--blanc); border: none; border-radius: 5px; cursor: pointer; font-weight: 600; transition: 0.3s; }
-
-        /* --- STATS --- */
-        .stats-bar { background: var(--bordeaux); color: var(--blanc); display: flex; justify-content: space-around; flex-wrap: wrap; padding: 60px 10%; text-align: center; gap: 30px; }
-        .stat-item h3 { font-size: 2.5rem; color: var(--doré); margin-bottom: 5px; }
-        .stat-item p { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
-
-        /* --- REVIEWS --- */
-        .reviews-slider { max-width: 800px; margin: 0 auto; text-align: center; position: relative; height: 250px; }
-        .review-slide { position: absolute; inset: 0; opacity: 0; transition: 1s; padding: 40px; }
-        .review-slide.active { opacity: 1; }
-        .stars { color: var(--doré); margin-bottom: 20px; font-size: 1.2rem; }
-        .review-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; margin-bottom: 20px; }
-
-        /* --- FOOTER --- */
-        footer { background: #0f0f0f; color: var(--blanc); padding: 80px 10% 40px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 60px; }
-        .footer-col h4 { color: var(--doré); margin-bottom: 25px; letter-spacing: 1px; }
-        .footer-col p { opacity: 0.7; margin-bottom: 12px; font-size: 0.9rem; }
-        .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; background: #25D366; }
-
-        /* --- WHATSAPP --- */
-        #wa-fixed { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; box-shadow: 0 5px 20px rgba(0,0,0,0.2); cursor: pointer; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); } 70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
-
-        @media (max-width: 768px) {
-            .hero { height: auto; padding: 60px 5%; flex-direction: column; text-align: center; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero-img-box { position: static; width: 100%; height: 350px; margin-top: 40px; }
-            nav { display: none; }
+        .google-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            box-shadow: var(--shadow-subtile);
+            margin-bottom: 50px;
         }
+
+        .stars { color: #F1C40F; font-size: 18px; }
+
+        .review-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            height: 300px;
+        }
+
+        .review-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .review-slide.active { opacity: 1; }
+
+        .rev-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; }
+        .rev-name { font-size: 22px; margin-bottom: 5px; }
+        .rev-location { font-size: 13px; color: var(--dore); text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px; }
+        .rev-text { font-size: 18px; color: #555; font-style: italic; line-height: 1.6; }
+
+        .rev-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .rev-arrow {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--dore);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dore);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .rev-arrow:hover { background: var(--dore); color: white; }
+
+        /* Instagram */
+        .insta-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .insta-item {
+            position: relative;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            cursor: not-allowed;
+        }
+
+        .insta-item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9) contrast(1.1); }
+
+        .insta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .insta-item:hover .insta-overlay { opacity: 1; }
+
+        /* Footer */
+        .map-container { width: 100%; height: 400px; }
+        .map-container iframe { width: 100%; height: 100%; border: none; filter: grayscale(1) invert(0.9); }
+
+        footer {
+            background: var(--noir);
+            color: white;
+            padding: 80px 5% 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--dore);
+        }
+
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 15px; }
+        .footer-links a:hover { color: white; }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .status-open { background: #27AE60; }
+        .status-closed { background: #E74C3C; }
+
+        .social-icons { display: flex; gap: 20px; margin-top: 20px; }
+        .social-icon { color: var(--dore); cursor: not-allowed; transition: 0.3s; }
+        .social-icon:hover { opacity: 0.7; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #222;
+            color: #555;
+            font-size: 13px;
+        }
+
+        /* WhatsApp Floating */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            z-index: 2000;
+            cursor: pointer;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-title { font-size: 48px; }
+            .collections-grid, .comparison-grid, .shop-grid, .stats-section, .history-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .collections-grid { height: auto; }
+            .large { grid-row: auto; height: 500px; }
+            .history-text { border-left: none; padding-left: 0; padding-top: 40px; border-top: 1px solid var(--dore); }
+            .insta-grid { grid-template-columns: repeat(3, 2fr); }
+            nav { display: none; }
+            .header-main { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; }
+            .logo { margin-bottom: 0; font-size: 32px; }
+            .hamburger { display: block; cursor: pointer; }
+        }
+
+        .hamburger { display: none; }
+        .hamburger div { width: 25px; height: 2px; background: var(--noir); margin: 6px 0; }
     </style>
 </head>
 <body>
 
-    <div id="loader"><div class="flower-loader"></div></div>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="loader-initials">AF</div>
+    </div>
 
-    <header>
-        <a href="index.html" class="logo">
-            <svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 12 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
-            L'Atelier Floral
-        </a>
-        <nav><ul><li><a href="index.html">Accueil</a></li><li><a href="gallery.html">Galerie</a></li><li><a href="devis.html">Sur-Mesure</a></li></ul></nav>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="top-banner">
+            🚚 Livraison Paris & banlieue · <span>Commande avant 11h</span> = livraison le jour même · ✂️ Compositions sur mesure
+        </div>
+        <div class="header-main">
+            <a href="index.html" class="logo">L'Atelier Floral</a>
+            <nav>
+                <a href="#accueil" class="nav-item">Maison</a>
+                <a href="#collections" class="nav-item">Collections</a>
+                <a href="gallery.html" class="nav-item">Galerie</a>
+                <a href="#histoire" class="nav-item">Notre Histoire</a>
+                <a href="#contact" class="nav-item">Contact</a>
+            </nav>
+            <div class="hamburger">
+                <div></div><div></div><div></div>
+            </div>
+        </div>
     </header>
 
-    <div id="demo-modal">
-        <div class="modal-content">
-            <h2>Mode Démo</h2>
-            <p id="demo-text"></p>
-            <button class="btn-close" onclick="document.getElementById('demo-modal').style.display='none'">J'AI COMPRIS</button>
+    <!-- Hero Section -->
+    <section class="hero" id="accueil" style="padding: 0; opacity: 1; transform: none;">
+        <div class="hero-slider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1487530811015-780780169b2d?w=1600')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=1600')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=1600')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1496062031456-07b8f162a322?w=1600')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=1600')"></div>
         </div>
-    </div>
-
-    <div id="wa-fixed" onclick="showDemo('ACTION WHATSAPP : Vos clients vous envoient un message instantané pour commander sans quitter leur téléphone.')">
-        <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.438 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    </div>
-
-    <section class="hero" style="opacity:1; transform:none;">
-        <div class="hero-content">
-            <h1>L'Art Floral à son Apogée</h1>
-            <p>Découvrez nos créations exclusives de roses d'exception et de bouquets de saison pour sublimer votre intérieur.</p>
-            <button class="btn-order" onclick="showDemo('Sur votre site, ce bouton redirigerait vers votre catalogue complet.')">DÉCOUVRIR</button>
-        </div>
-        <div class="hero-img-box">
-            <!-- Image de la rose magnifique suggérée -->
-            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80" alt="Magnifique Rose">
+        <div class="hero-overlay">
+            <h1 class="hero-title">L'art floral parisien</h1>
+            <p class="hero-subtitle">Compositions uniques · Livraison le jour même</p>
+            <div class="hero-btns">
+                <a href="gallery.html" class="btn btn-primary">Découvrir nos créations</a>
+                <a class="btn btn-outline demo-disabled" data-tooltip="💬 Mode démo · Sur votre site : commande WhatsApp instantanée">Commander sur WhatsApp</a>
+            </div>
+            <div class="hero-dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
         </div>
     </section>
 
-    <div class="stats-bar">
-        <div class="stat-item"><h3>12</h3><p>Ans d'Expérience</p></div>
-        <div class="stat-item"><h3>4.9/5</h3><p>Note Google Maps</p></div>
-        <div class="stat-item"><h3>J+0</h3><p>Livraison Paris</p></div>
-    </div>
-
+    <!-- Collections -->
     <section id="collections">
-        <div class="section-title"><h2>Nos Signatures</h2><div class="divider"></div></div>
+        <h2 class="section-title">Nos Univers</h2>
         <div class="collections-grid">
-            <div class="item-card">
-                <div class="item-img"><img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?auto=format&fit=crop&w=600&q=80"></div>
-                <h3>L'Innocence Blanche</h3><p class="price">45,00 €</p>
-                <button class="btn-order" onclick="showDemo('COMMANDE : Le client valide son choix et vous recevez une notification immédiate.')">COMMANDER</button>
+            <div class="col-card large">
+                <img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=1200" alt="Romantique">
+                <div class="col-overlay">
+                    <h3 class="col-title">Romantique & Passion</h3>
+                    <a href="gallery.html" class="col-btn">Explorer</a>
+                </div>
             </div>
-            <div class="item-card">
-                <div class="item-img"><img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80"></div>
-                <h3>Passion Velours</h3><p class="price">65,00 €</p>
-                <button class="btn-order" onclick="showDemo('ACTION : Ce bouton déclenche l\'ouverture de WhatsApp ou du panier.')">COMMANDER</button>
+            <div class="col-card">
+                <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800" alt="Champêtre">
+                <div class="col-overlay">
+                    <h3 class="col-title">Champêtre & Naturel</h3>
+                    <a href="gallery.html" class="col-btn">Explorer</a>
+                </div>
+            </div>
+            <div class="col-card">
+                <div class="ribbon">Sur Mesure</div>
+                <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=800" alt="Mariage">
+                <div class="col-overlay">
+                    <h3 class="col-title">Mariage & Cérémonie</h3>
+                    <a href="gallery.html" class="col-btn">Explorer</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="reviews">
-        <div class="section-title"><h2>Avis de nos Clients</h2><div class="divider"></div></div>
-        <div class="reviews-slider">
-            <div class="review-slide active">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Les bouquets sont sublimes et tiennent vraiment longtemps. Un service de luxe à Paris !"</p>
-                <p><strong>Marie D.</strong> - Paris 16e</p>
+    <!-- Avant / Après (Demo Sell) -->
+    <section>
+        <h2 class="section-title">La différence DigitalFR</h2>
+        <div class="comparison-grid">
+            <div class="comp-card comp-before">
+                <span class="badge badge-red">Site actuel</span>
+                <div class="wix-mockup">
+                    <div class="mockup-header"></div>
+                    <div class="mockup-hero">VOTRE SITE ACTUEL (EXEMPLE WIX)</div>
+                </div>
+                <h3 class="comp-title">Avant</h3>
+                <ul class="comp-list">
+                    <li>❌ Design amateur & daté</li>
+                    <li>❌ Invisible sur Google</li>
+                    <li>❌ Pas de commande en ligne rapide</li>
+                    <li>❌ Ne donne pas confiance aux clients</li>
+                </ul>
             </div>
-            <div class="review-slide">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Commandé le matin, livré à 14h. Les roses sont d'une qualité exceptionnelle."</p>
-                <p><strong>Thomas L.</strong> - Neuilly</p>
+            <div class="comp-card comp-after">
+                <span class="badge badge-green">Avec DigitalFR</span>
+                <div class="wix-mockup" style="background: url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=400') center; background-size: cover;">
+                    <div style="background: rgba(0,0,0,0.3); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">L'ATELIER FLORAL</div>
+                </div>
+                <h3 class="comp-title">Après</h3>
+                <ul class="comp-list">
+                    <li>✅ Design Luxe "Maison Parisienne"</li>
+                    <li>✅ Référencement Google Optimisé</li>
+                    <li>✅ Commandes WhatsApp Directes</li>
+                    <li>✅ Clients convaincus par l'image</li>
+                </ul>
             </div>
         </div>
     </section>
+
+    <!-- Boutique -->
+    <section>
+        <h2 class="section-title">Nos Créations</h2>
+        <div class="shop-grid">
+            <!-- Bouquet 1 -->
+            <div class="product-card">
+                <div class="ribbon ribbon-bordeaux">Bestseller</div>
+                <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=600" class="product-img" alt="Bouquet Romantique">
+                <div class="product-info">
+                    <h3 class="p-name">Bouquet Romantique</h3>
+                    <p class="p-desc">Roses rouges et pivoines</p>
+                    <p class="p-price">45€</p>
+                </div>
+                <div class="product-hover-btn demo-disabled" data-tooltip="💬 Mode démo · Sur votre site : commande WhatsApp instantanée">Commander</div>
+            </div>
+            <!-- Bouquet 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1596438459194-f275f413d6ff?w=600" class="product-img" alt="Composition Champêtre">
+                <div class="product-info">
+                    <h3 class="p-name">Composition Champêtre</h3>
+                    <p class="p-desc">Fleurs des champs</p>
+                    <p class="p-price">65€</p>
+                </div>
+                <div class="product-hover-btn demo-disabled" data-tooltip="💬 Mode démo · Sur votre site : commande WhatsApp instantanée">Commander</div>
+            </div>
+            <!-- Bouquet 3 -->
+            <div class="product-card">
+                <div class="ribbon">Nouveau</div>
+                <img src="https://images.unsplash.com/photo-1519225495810-758b63300051?w=600" class="product-img" alt="Bouquet Mariage Blanc">
+                <div class="product-info">
+                    <h3 class="p-name">Bouquet Mariage Blanc</h3>
+                    <p class="p-desc">Lys et orchidées</p>
+                    <p class="p-price">120€</p>
+                </div>
+                <div class="product-hover-btn demo-disabled" data-tooltip="💬 Mode démo · Sur votre site : commande WhatsApp instantanée">Commander</div>
+            </div>
+            <!-- Bouquet 4 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1518131348000-848e364653e0?w=600" class="product-img" alt="Roses Rouges Premium">
+                <div class="product-info">
+                    <h3 class="p-name">Roses Rouges Premium</h3>
+                    <p class="p-desc">24 roses longues tiges</p>
+                    <p class="p-price">55€</p>
+                </div>
+                <div class="product-hover-btn demo-disabled" data-tooltip="💬 Mode démo · Sur votre site : commande WhatsApp instantanée">Commander</div>
+            </div>
+            <!-- Bouquet 5 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1556950961-8c03554e1516?w=600" class="product-img" alt="Bouquet Pastel">
+                <div class="product-info">
+                    <h3 class="p-name">Bouquet Pastel</h3>
+                    <p class="p-desc">Tons poudre et crème</p>
+                    <p class="p-price">40€</p>
+                </div>
+                <div class="product-hover-btn demo-disabled" data-tooltip="💬 Mode démo · Sur votre site : commande WhatsApp instantanée">Commander</div>
+            </div>
+            <!-- Bouquet 6 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1523175107508-a1f9da927ff4?w=600" class="product-img" alt="Arrangement Pivoine">
+                <div class="product-info">
+                    <h3 class="p-name">Arrangement Pivoine</h3>
+                    <p class="p-desc">Pivoines et eucalyptus</p>
+                    <p class="p-price">75€</p>
+                </div>
+                <div class="product-hover-btn demo-disabled" data-tooltip="💬 Mode démo · Sur votre site : commande WhatsApp instantanée">Commander</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section" style="padding: 0; opacity: 1; transform: none;">
+        <div class="stat-item">
+            <h3>15</h3>
+            <p>ans d'expérience</p>
+        </div>
+        <div class="stat-item">
+            <h3>3 200</h3>
+            <p>bouquets créés</p>
+        </div>
+        <div class="stat-item">
+            <h3>98%</h3>
+            <p>clients satisfaits</p>
+        </div>
+        <div class="stat-item">
+            <h3>2h</h3>
+            <p>délai de livraison</p>
+        </div>
+    </section>
+
+    <!-- Histoire -->
+    <section id="histoire">
+        <div class="history-grid">
+            <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?w=1000" class="history-img" alt="Marie Fleuriste">
+            <div class="history-text">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">Notre Histoire</h2>
+                <p>"Depuis 2009, Marie et son équipe composent chaque bouquet comme une œuvre d'art. Née d'une passion transmise de mère en fille, L'Atelier Floral est devenu la référence florale du 11e arrondissement. Nous croyons que les fleurs ne sont pas de simples objets, mais des messagers d'émotions pures."</p>
+                <div class="signature">Marie de L'Atelier Floral</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avis -->
+    <section class="reviews-section">
+        <div class="google-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            <div class="stars">★★★★★</div>
+            <div style="font-weight: 500;">4.9 · 127 avis</div>
+        </div>
+        <div class="review-slider">
+            <!-- Avis 1 -->
+            <div class="review-slide active">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" class="rev-avatar">
+                <h4 class="rev-name">Léa Martin</h4>
+                <p class="rev-location">Le Marais, Paris</p>
+                <p class="rev-text">"Un bouquet absolument somptueux reçu pour mon anniversaire. Les fleurs ont tenu plus de 10 jours, une qualité rare !"</p>
+            </div>
+            <!-- Avis 2 -->
+            <div class="review-slide">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="rev-avatar">
+                <h4 class="rev-name">Thomas Bernard</h4>
+                <p class="rev-location">Saint-Germain, Paris</p>
+                <p class="rev-text">"La commande via WhatsApp est d'une simplicité déconcertante. Réponse rapide et bouquet sur mesure parfait."</p>
+            </div>
+            <!-- Avis 3 -->
+            <div class="review-slide">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100" class="rev-avatar">
+                <h4 class="rev-name">Sophie Laurent</h4>
+                <p class="rev-location">Bastille, Paris</p>
+                <p class="rev-text">"L'Atelier Floral a réalisé la décoration de notre mariage. Tout était divin, élégant et raffiné."</p>
+            </div>
+            <!-- Avis 4 -->
+            <div class="review-slide">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100" class="rev-avatar">
+                <h4 class="rev-name">Julien Roux</h4>
+                <p class="rev-location">Canal St-Martin, Paris</p>
+                <p class="rev-text">"Service de livraison impeccable en 2h chrono. Le bouquet était encore plus beau que sur les photos."</p>
+            </div>
+            <!-- Avis 5 -->
+            <div class="review-slide">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" class="rev-avatar">
+                <h4 class="rev-name">Emma Petit</h4>
+                <p class="rev-location">Montmartre, Paris</p>
+                <p class="rev-text">"Une boutique avec une âme. On sent la passion dans chaque composition. Ma fleuriste préférée à Paris."</p>
+            </div>
+        </div>
+        <div class="rev-nav">
+            <div class="rev-arrow" onclick="prevReview()">←</div>
+            <div class="rev-arrow" onclick="nextReview()">→</div>
+        </div>
+    </section>
+
+    <!-- Instagram -->
+    <section>
+        <h2 class="section-title">Suivez notre quotidien floral</h2>
+        <div class="insta-grid">
+            <div class="insta-item demo-disabled" data-tooltip="📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct">
+                <img src="https://images.unsplash.com/photo-1522673607200-164883eeca48?w=400" alt="Insta">
+                <div class="insta-overlay">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </div>
+            </div>
+            <div class="insta-item demo-disabled" data-tooltip="📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct">
+                <img src="https://images.unsplash.com/photo-1563241527-3004b7be0fab?w=400" alt="Insta">
+            </div>
+            <div class="insta-item demo-disabled" data-tooltip="📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct">
+                <img src="https://images.unsplash.com/photo-1523694553227-ecca17d465d0?w=400" alt="Insta">
+            </div>
+            <div class="insta-item demo-disabled" data-tooltip="📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct">
+                <img src="https://images.unsplash.com/photo-1516533075015-a3838414c3ca?w=400" alt="Insta">
+            </div>
+            <div class="insta-item demo-disabled" data-tooltip="📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct">
+                <img src="https://images.unsplash.com/photo-1550983092-246a241105e7?w=400" alt="Insta">
+            </div>
+            <div class="insta-item demo-disabled" data-tooltip="📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct">
+                <img src="https://images.unsplash.com/photo-1512423377726-21376839352e?w=400" alt="Insta">
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <a class="btn btn-outline demo-disabled" style="color: var(--noir); border-color: var(--noir);" data-tooltip="📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct">Nous suivre sur Instagram</a>
+        </div>
+    </section>
+
+    <!-- Map & Footer -->
+    <div class="map-container" id="contact">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.3767768!3d48.8583701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66df4f6645391%3A0x673c09b7c84523c0!2s11th%20Arrondissement%2C%20Paris%2C%20France!5e0!3m2!1sen!2sfr!4v1700000000000!5m2!1sen!2sfr" allowfullscreen="" loading="lazy"></iframe>
+    </div>
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-col"><h4>L'ATELIER FLORAL</h4><p>Artisan créateur à Paris. Excellence et fraîcheur garantie.</p></div>
-            <div class="footer-col"><h4>HORAIRES</h4><p><span class="status-dot"></span>Ouvert maintenant</p><p>Lun-Sam : 9h-19h30</p></div>
-            <div class="footer-col"><h4>CONTACT</h4><p>12 Avenue des Ternes, 75017 Paris</p><p>01 45 67 89 10</p></div>
+            <div class="footer-col">
+                <h4>Informations</h4>
+                <p style="color: #aaa; font-size: 15px; margin-bottom: 20px;">12 Rue de la Roquette<br>75011 Paris, France</p>
+                <p style="color: #aaa; font-size: 15px;">contact@atelierfloral-paris.fr<br>+33 1 23 45 67 89</p>
+                <div style="margin-top: 20px;">
+                    <span id="store-status-dot" class="status-dot"></span>
+                    <span id="store-status-text"></span>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="#accueil">Maison</a></li>
+                    <li><a href="#collections">Collections</a></li>
+                    <li><a href="gallery.html">Galerie</a></li>
+                    <li><a href="#histoire">Notre Histoire</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Suivez-nous</h4>
+                <div class="social-icons">
+                    <a class="social-icon demo-disabled" data-tooltip="📱 Mode démo · Sur votre site : accès direct à vos réseaux">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a class="social-icon demo-disabled" data-tooltip="📱 Mode démo · Sur votre site : accès direct à vos réseaux">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="copyright">&copy; 2026 L'Atelier Floral. Réalisé par DigitalFR.</div>
+        <div class="copyright">
+            © 2026 L'Atelier Floral · Site créé par DigitalFR
+        </div>
     </footer>
 
+    <!-- WhatsApp Floating -->
+    <div class="whatsapp-float demo-disabled" data-tooltip="📱 Mode démo · Sur votre site : vos clients vous contactent ici directement">
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+
+    <!-- Script Global -->
     <script>
-        window.onload = () => { document.getElementById('loader').style.opacity = '0'; setTimeout(() => document.getElementById('loader').style.display = 'none', 800); };
-        window.onscroll = () => { document.querySelectorAll('section').forEach(sec => { if (window.scrollY >= sec.offsetTop - 700) sec.classList.add('visible'); }); };
-        function showDemo(t) { document.getElementById('demo-text').innerText = t; document.getElementById('demo-modal').style.display = 'flex'; }
-        
-        let c = 0; const s = document.querySelectorAll('.review-slide');
-        setInterval(() => { s[c].classList.remove('active'); c = (c + 1) % s.length; s[c].classList.add('active'); }, 4000);
+        const WHATSAPP_NUMBER = '33600000000';
+
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 1500);
+        });
+
+        // Header Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Progress Bar
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+        // Hero Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 8000);
+
+        // Reviews Slider
+        let currentReview = 0;
+        const revSlides = document.querySelectorAll('.review-slide');
+
+        function showReview(n) {
+            revSlides[currentReview].classList.remove('active');
+            currentReview = (n + revSlides.length) % revSlides.length;
+            revSlides[currentReview].classList.add('active');
+        }
+
+        function nextReview() { showReview(currentReview + 1); }
+        function prevReview() { showReview(currentReview - 1); }
+        setInterval(nextReview, 4000);
+
+        // Tooltip System
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        document.body.appendChild(tooltip);
+
+        document.querySelectorAll('.demo-disabled').forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                tooltip.innerHTML = el.getAttribute('data-tooltip');
+                tooltip.classList.add('visible');
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY + 10 + 'px';
+            });
+            el.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('visible');
+            });
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Subtle feedback instead of alert
+                tooltip.style.transform = 'scale(1.1)';
+                setTimeout(() => tooltip.style.transform = 'scale(1)', 100);
+            });
+        });
+
+        // Store Status
+        function updateStatus() {
+            const now = new Date();
+            const day = now.getDay();
+            const hour = now.getHours();
+            const dot = document.getElementById('store-status-dot');
+            const text = document.getElementById('store-status-text');
+
+            if (day >= 1 && day <= 6 && hour >= 9 && hour < 19) {
+                dot.className = 'status-dot status-open';
+                text.innerText = '🟢 Ouvert · Ferme à 19h';
+            } else {
+                dot.className = 'status-dot status-closed';
+                text.innerText = '🔴 Fermé · Ouvre à 9h';
+            }
+        }
+        updateStatus();
     </script>
 </body>
 </html>
