@@ -18,9 +18,84 @@
             --shadow-subtile: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
         body { font-family: 'Jost', sans-serif; background: white; color: var(--noir); overflow-x: hidden; }
         h1, h2, h3, .logo { font-family: 'Cormorant Garamond', serif; }
+
+        /* Demo Modal */
+        #demoModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none; /* Changed from flex to none */
+            justify-content: center;
+            align-items: center;
+            z-index: 10002;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        #demoModal.visible {
+            opacity: 1;
+            visibility: visible;
+            display: flex; /* Display flex when visible */
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        #demoModal.visible .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: var(--bordeaux);
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            font-size: 16px;
+            color: var(--noir);
+            margin-bottom: 30px;
+        }
+
+        .modal-close-btn {
+            background: var(--bordeaux);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--bordeaux-hover);
+        }
 
         /* Reuse Header Styles from index */
         header { width: 100%; position: fixed; top: 0; z-index: 1000; background: white; box-shadow: var(--shadow-subtile); }
@@ -92,6 +167,14 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+        #lightbox.visible {
+            opacity: 1;
+            visibility: visible;
+            display: flex; /* Display flex when visible */
         }
 
         .lightbox-img { max-width: 90%; max-height: 80%; object-fit: contain; }
@@ -108,12 +191,7 @@
             border: none;
             text-transform: uppercase;
             letter-spacing: 2px;
-            cursor: not-allowed;
         }
-
-        /* Tooltip */
-        .tooltip { position: absolute; background: var(--bordeaux-hover); color: white; padding: 10px 16px; border-radius: 8px; font-size: 14px; z-index: 3000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; pointer-events: none; white-space: nowrap; }
-        .tooltip.visible { opacity: 1; visibility: visible; }
 
         /* WhatsApp Floating */
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); z-index: 1500; cursor: pointer; }
@@ -131,6 +209,22 @@
             nav { display: none; }
             .gallery-hero h1 { font-size: 40px; }
             .footer-grid { grid-template-columns: 1fr; }
+            .header-main { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; }
+            .logo { margin-bottom: 0; font-size: 32px; }
+            .hamburger { display: block; cursor: pointer; }
+            header nav.mobile-nav-visible {
+                display: flex; /* Show when active */
+                flex-direction: column;
+                background: white;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                box-shadow: var(--shadow-subtile);
+                padding: 20px 0;
+            }
+            .nav-item { padding: 10px 0; border-bottom: 1px solid var(--rose); }
+            .nav-item:last-child { border-bottom: none; }
         }
     </style>
 </head>
@@ -147,6 +241,9 @@
                 <a href="index.html#histoire" class="nav-item">Notre Histoire</a>
                 <a href="index.html#contact" class="nav-item">Contact</a>
             </nav>
+            <div class="hamburger">
+                <div></div><div></div><div></div>
+            </div>
         </div>
     </header>
 
@@ -169,7 +266,7 @@
     </div>
 
     <div id="lightbox">
-        <span class="lightbox-close">&times;</span>
+        <span class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('visible');">&times;</span>
         <div class="lightbox-nav">
             <div class="lightbox-arrow" id="prevBtn">←</div>
             <div class="lightbox-arrow" id="nextBtn">→</div>
@@ -178,7 +275,7 @@
         <div class="lightbox-info">
             <h2 id="lbName" class="item-name"></h2>
             <p id="lbPrice" class="item-price"></p>
-            <button class="btn-order-lb demo-disabled" data-tooltip="💬 Mode démo · Sur votre site : commande WhatsApp instantanée">Commander ce bouquet</button>
+            <button class="btn-order-lb" onclick="showDemoModal('💬 Mode démo · Sur votre site : commande WhatsApp instantanée');">Commander ce bouquet</button>
         </div>
     </div>
 
@@ -204,8 +301,17 @@
         <div class="copyright">© 2026 L'Atelier Floral · Site créé par DigitalFR</div>
     </footer>
 
-    <div class="whatsapp-float demo-disabled" data-tooltip="📱 Mode démo · Sur votre site : vos clients vous contactent ici directement">
+    <div class="whatsapp-float" onclick="showDemoModal('📱 Mode démo · Sur votre site : vos clients vous contactent ici directement');">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+
+    <!-- Demo Modal -->
+    <div id="demoModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Mode Démo</h3>
+            <p id="modalMessage"></p>
+            <button class="modal-close-btn" onclick="document.getElementById('demoModal').classList.remove('visible');">J'ai Compris</button>
+        </div>
     </div>
 
     <script>
@@ -232,6 +338,12 @@
         let activeIdx = 0;
         let filteredBouquets = [...bouquets];
 
+        // New function for modal
+        function showDemoModal(message) {
+            document.getElementById('modalMessage').innerText = message;
+            document.getElementById('demoModal').classList.add('visible');
+        }
+
         function renderGallery(filter = 'all') {
             grid.innerHTML = '';
             filteredBouquets = filter === 'all' ? bouquets : bouquets.filter(b => b.cat === filter);
@@ -257,10 +369,11 @@
             lbImg.src = b.img;
             lbName.innerText = b.name;
             lbPrice.innerText = b.price;
-            lb.style.display = 'flex';
+            lb.classList.add('visible');
         }
 
-        document.querySelector('.lightbox-close').onclick = () => lb.style.display = 'none';
+        // Modified to use classList.remove('visible')
+        document.querySelector('.lightbox-close').onclick = () => lb.classList.remove('visible');
         document.getElementById('nextBtn').onclick = () => openLightbox((activeIdx + 1) % filteredBouquets.length);
         document.getElementById('prevBtn').onclick = () => openLightbox((activeIdx - 1 + filteredBouquets.length) % filteredBouquets.length);
 
@@ -272,25 +385,10 @@
             };
         });
 
-        // Tooltip System
-        const tooltip = document.createElement('div');
-        tooltip.className = 'tooltip';
-        document.body.appendChild(tooltip);
-        document.addEventListener('mouseover', (e) => {
-            const target = e.target.closest('.demo-disabled');
-            if (target) {
-                tooltip.innerHTML = target.getAttribute('data-tooltip');
-                tooltip.classList.add('visible');
-            }
-        });
-        document.addEventListener('mousemove', (e) => {
-            if (tooltip.classList.contains('visible')) {
-                tooltip.style.left = e.pageX + 10 + 'px';
-                tooltip.style.top = e.pageY + 10 + 'px';
-            }
-        });
-        document.addEventListener('mouseout', (e) => {
-            if (e.target.closest('.demo-disabled')) tooltip.classList.remove('visible');
+        // Mobile Nav Toggle (Hamburger)
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            const nav = document.querySelector('header nav');
+            nav.classList.toggle('mobile-nav-visible');
         });
 
         renderGallery();
