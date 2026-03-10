@@ -3,53 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nos Bouquets - L'Atelier Floral</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <title>Galerie - L'Atelier Floral | Artisan Fleuriste Parisien</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        :root { --color-burgundy: #8B1A3A; --color-gold: #C9A96E; --color-white-off: #FDFAF7; }
-        body { font-family: 'Lato', sans-serif; background-color: var(--color-white-off); margin: 0; }
-        header { background: white; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center; }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--color-burgundy); text-decoration: none; font-weight: bold; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 50px 20px; max-width: 1200px; margin: 0 auto; }
-        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
-        .card:hover { transform: translateY(-10px); }
-        .card img { width: 100%; height: 400px; object-fit: cover; background: #eee; }
-        .info { padding: 20px; text-align: center; }
-        .price { color: var(--color-gold); font-weight: bold; font-size: 1.2rem; }
-        .btn { display: block; background: var(--color-burgundy); color: white; padding: 10px; text-decoration: none; margin-top: 15px; border-radius: 4px; text-transform: uppercase; font-size: 0.8rem; }
+        :root {
+            --bordeaux: #6B1212;
+            --bordeaux-hover: #4A0E0E;
+            --rose: #F5E6E8;
+            --blanc-casse: #FAFAF8;
+            --dore: #C9A84C;
+            --noir: #0D0D0D;
+            --transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            --shadow-subtile: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Jost', sans-serif; background: white; color: var(--noir); overflow-x: hidden; }
+        h1, h2, h3, .logo { font-family: 'Cormorant Garamond', serif; }
+
+        /* Reuse Header Styles from index */
+        header { width: 100%; position: fixed; top: 0; z-index: 1000; background: white; box-shadow: var(--shadow-subtile); }
+        .top-banner { background: var(--bordeaux); color: white; text-align: center; padding: 8px 0; font-size: 12px; font-weight: 300; letter-spacing: 1px; }
+        .header-main { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 32px; color: var(--noir); text-decoration: none; position: relative; }
+        .logo::after { content: ''; position: absolute; bottom: -5px; left: 15%; width: 70%; height: 1px; background: var(--dore); }
+        nav { display: flex; gap: 40px; }
+        .nav-item { text-decoration: none; color: var(--noir); font-size: 16px; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
+        .nav-item:hover { color: var(--bordeaux); }
+
+        /* Gallery Content */
+        .gallery-hero { padding: 180px 5% 60px; text-align: center; background: var(--blanc-casse); }
+        .gallery-hero h1 { font-size: 64px; margin-bottom: 10px; font-weight: 300; }
+        .gallery-hero p { font-size: 18px; color: #888; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* Filters */
+        .filters { display: flex; justify-content: center; gap: 15px; margin: 40px 0; flex-wrap: wrap; }
+        .filter-btn {
+            padding: 10px 25px;
+            border: 1px solid var(--bordeaux);
+            background: transparent;
+            color: var(--bordeaux);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+        .filter-btn.active, .filter-btn:hover { background: var(--bordeaux); color: white; }
+
+        /* Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 5% 100px;
+        }
+
+        .gallery-item {
+            background: white;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .gallery-item:hover img { filter: brightness(0.8); }
+
+        .item-info { padding: 20px 0; text-align: center; }
+        .item-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-bottom: 5px; }
+        .item-price { color: var(--dore); font-weight: 600; }
+
+        /* Lightbox */
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .lightbox-img { max-width: 90%; max-height: 80%; object-fit: contain; }
+        .lightbox-info { color: white; text-align: center; margin-top: 20px; }
+        .lightbox-close { position: absolute; top: 30px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+        .lightbox-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; padding: 0 40px; color: white; font-size: 40px; pointer-events: none; }
+        .lightbox-arrow { cursor: pointer; pointer-events: auto; user-select: none; }
+
+        .btn-order-lb {
+            margin-top: 20px;
+            background: var(--bordeaux);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: not-allowed;
+        }
+
+        /* Tooltip */
+        .tooltip { position: absolute; background: var(--bordeaux-hover); color: white; padding: 10px 16px; border-radius: 8px; font-size: 14px; z-index: 3000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; pointer-events: none; white-space: nowrap; }
+        .tooltip.visible { opacity: 1; visibility: visible; }
+
+        /* WhatsApp Floating */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); z-index: 1500; cursor: pointer; }
+
+        /* Footer reused */
+        footer { background: var(--noir); color: white; padding: 80px 5% 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
+        .footer-col h4 { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-bottom: 30px; color: var(--dore); }
+        .footer-links { list-style: none; }
+        .footer-links a { color: #aaa; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: white; }
+        .copyright { text-align: center; padding-top: 40px; border-top: 1px solid #222; color: #555; margin-top: 60px; }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .gallery-hero h1 { font-size: 40px; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+
     <header>
-        <a href="index.html" class="logo">L'Atelier Floral</a>
-        <br><br>
-        <a href="index.html" style="text-decoration:none; color:#666;">← Retour</a>
+        <div class="top-banner">🚚 Livraison Paris & banlieue · Commande avant 11h = livraison le jour même</div>
+        <div class="header-main">
+            <a href="index.html" class="logo">L'Atelier Floral</a>
+            <nav>
+                <a href="index.html" class="nav-item">Maison</a>
+                <a href="index.html#collections" class="nav-item">Collections</a>
+                <a href="gallery.html" class="nav-item" style="color: var(--bordeaux)">Galerie</a>
+                <a href="index.html#histoire" class="nav-item">Notre Histoire</a>
+                <a href="index.html#contact" class="nav-item">Contact</a>
+            </nav>
+        </div>
     </header>
-    <div class="gallery">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80" alt="Bouquet 1">
-            <div class="info"><h3>Douceur Pastel</h3><p class="price">45,00 €</p><a href="#" class="btn" onclick="alert('Mode Démo')">Commander</a></div>
+
+    <div class="gallery-hero">
+        <h1>Nos Créations</h1>
+        <p>L'excellence florale pour chaque instant</p>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="romantique">Romantique</button>
+        <button class="filter-btn" data-filter="champetre">Champêtre</button>
+        <button class="filter-btn" data-filter="mariage">Mariage</button>
+        <button class="filter-btn" data-filter="deuil">Deuil</button>
+        <button class="filter-btn" data-filter="evenement">Événement</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+        <!-- JS will populate or we hardcode for speed -->
+    </div>
+
+    <div id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-nav">
+            <div class="lightbox-arrow" id="prevBtn">←</div>
+            <div class="lightbox-arrow" id="nextBtn">→</div>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1591886960571-74d43a9d4166?auto=format&fit=crop&w=600&q=80" alt="Bouquet 2">
-            <div class="info"><h3>Passion Éclatante</h3><p class="price">65,00 €</p><a href="#" class="btn" onclick="alert('Mode Démo')">Commander</a></div>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80" alt="Bouquet 3">
-            <div class="info"><h3>Ésprit Sauvage</h3><p class="price">55,00 €</p><a href="#" class="btn" onclick="alert('Mode Démo')">Commander</a></div>
-        </div>
-        <div class="card">
-            <img src="https://www.fleurs-corolle.fr/wp-content/uploads/2025/02/Bouquet-champetre-pastel-55E-1800x2700.jpg" alt="Bouquet 4">
-            <div class="info"><h3>Rêve de Pivoines</h3><p class="price">75,00 €</p><a href="#" class="btn" onclick="alert('Mode Démo')">Commander</a></div>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80" alt="Bouquet 5">
-            <div class="info"><h3>Élégance Royale</h3><p class="price">85,00 €</p><a href="#" class="btn" onclick="alert('Mode Démo')">Commander</a></div>
-        </div>
-        <div class="card">
-            <img src="https://luvbox-paris.fr/1543-large_default_2x/bouquet-la-belle.jpg" alt="Bouquet 6">
-            <div class="info"><h3>Aube Printanière</h3><p class="price">40,00 €</p><a href="#" class="btn" onclick="alert('Mode Démo')">Commander</a></div>
+        <img src="" class="lightbox-img" id="lbImg">
+        <div class="lightbox-info">
+            <h2 id="lbName" class="item-name"></h2>
+            <p id="lbPrice" class="item-price"></p>
+            <button class="btn-order-lb demo-disabled" data-tooltip="💬 Mode démo · Sur votre site : commande WhatsApp instantanée">Commander ce bouquet</button>
         </div>
     </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Informations</h4>
+                <p style="color: #aaa;">12 Rue de la Roquette<br>75011 Paris, France</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Maison</a></li>
+                    <li><a href="gallery.html">Galerie</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Suivez-nous</h4>
+                <p style="color: #aaa;">@atelierfloral_paris</p>
+            </div>
+        </div>
+        <div class="copyright">© 2026 L'Atelier Floral · Site créé par DigitalFR</div>
+    </footer>
+
+    <div class="whatsapp-float demo-disabled" data-tooltip="📱 Mode démo · Sur votre site : vos clients vous contactent ici directement">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+
+    <script>
+        const bouquets = [
+            { name: "Amour Éternel", price: "55€", cat: "romantique", img: "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800" },
+            { name: "Douceur des Champs", price: "45€", cat: "champetre", img: "https://images.unsplash.com/photo-1596438459194-f275f413d6ff?w=800" },
+            { name: "Olympe Blanc", price: "120€", cat: "mariage", img: "https://images.unsplash.com/photo-1519225495810-758b63300051?w=800" },
+            { name: "Hommage", price: "85€", cat: "deuil", img: "https://images.unsplash.com/photo-1518131348000-848e364653e0?w=800" },
+            { name: "Gala Prestige", price: "150€", cat: "evenement", img: "https://images.unsplash.com/photo-1523175107508-a1f9da927ff4?w=800" },
+            { name: "Cœur Grenadine", price: "40€", cat: "romantique", img: "https://images.unsplash.com/photo-1556950961-8c03554e1516?w=800" },
+            { name: "Brise d'Été", price: "65€", cat: "champetre", img: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=800" },
+            { name: "Union Sacrée", price: "200€", cat: "mariage", img: "https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=800" },
+            { name: "Souvenir Alizé", price: "70€", cat: "deuil", img: "https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=800" },
+            { name: "Soirée Riviera", price: "95€", cat: "evenement", img: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?w=800" },
+            { name: "Rouge Passion", price: "50€", cat: "romantique", img: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=800" },
+            { name: "Jardin de Marie", price: "60€", cat: "champetre", img: "https://images.unsplash.com/photo-1487530811015-780780169b2d?w=800" }
+        ];
+
+        const grid = document.getElementById('galleryGrid');
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        const lbName = document.getElementById('lbName');
+        const lbPrice = document.getElementById('lbPrice');
+        let activeIdx = 0;
+        let filteredBouquets = [...bouquets];
+
+        function renderGallery(filter = 'all') {
+            grid.innerHTML = '';
+            filteredBouquets = filter === 'all' ? bouquets : bouquets.filter(b => b.cat === filter);
+            
+            filteredBouquets.forEach((b, idx) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <img src="${b.img}" alt="${b.name}">
+                    <div class="item-info">
+                        <h3 class="item-name">${b.name}</h3>
+                        <p class="item-price">${b.price}</p>
+                    </div>
+                `;
+                item.onclick = () => openLightbox(idx);
+                grid.appendChild(item);
+            });
+        }
+
+        function openLightbox(idx) {
+            activeIdx = idx;
+            const b = filteredBouquets[idx];
+            lbImg.src = b.img;
+            lbName.innerText = b.name;
+            lbPrice.innerText = b.price;
+            lb.style.display = 'flex';
+        }
+
+        document.querySelector('.lightbox-close').onclick = () => lb.style.display = 'none';
+        document.getElementById('nextBtn').onclick = () => openLightbox((activeIdx + 1) % filteredBouquets.length);
+        document.getElementById('prevBtn').onclick = () => openLightbox((activeIdx - 1 + filteredBouquets.length) % filteredBouquets.length);
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                renderGallery(btn.dataset.filter);
+            };
+        });
+
+        // Tooltip System
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        document.body.appendChild(tooltip);
+        document.addEventListener('mouseover', (e) => {
+            const target = e.target.closest('.demo-disabled');
+            if (target) {
+                tooltip.innerHTML = target.getAttribute('data-tooltip');
+                tooltip.classList.add('visible');
+            }
+        });
+        document.addEventListener('mousemove', (e) => {
+            if (tooltip.classList.contains('visible')) {
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY + 10 + 'px';
+            }
+        });
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('.demo-disabled')) tooltip.classList.remove('visible');
+        });
+
+        renderGallery();
+    </script>
 </body>
 </html>
