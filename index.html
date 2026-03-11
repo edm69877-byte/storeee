@@ -760,6 +760,12 @@
             .nav-item { padding: 10px 0; border-bottom: 1px solid var(--rose); }
             .nav-item:last-child { border-bottom: none; }
         }
+    
+        @media (max-width: 992px) {
+            #contact > div {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1066,9 +1072,46 @@
     </section>
 
     <!-- Map & Footer -->
-    <div class="map-container" id="contact">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.3767768!3d48.8583701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66df4f6645391%3A0x673c09b7c84523c0!2s11th%20Arrondissement%2C%20Paris%2C%20France!5e0!3m2!1sen!2sfr!4v1700000000000!5m2!1sen!2sfr" allowfullscreen="" loading="lazy"></iframe>
-    </div>
+
+    <!-- Contact Form & Map Section -->
+    <section id="contact" style="padding: 100px 5%; background: var(--blanc-casse);">
+        <h2 class="section-title">Nous Contacter</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; align-items: start;">
+            <!-- Contact Form -->
+            <div style="background: white; padding: 40px; border-radius: 4px; box-shadow: var(--shadow-subtile);">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 28px; margin-bottom: 20px;">Envoyez-nous un message</h3>
+                <form onsubmit="event.preventDefault(); showDemoModal('✉️ Mode démo · Sur votre site : vous recevez les messages de vos clients directement sur votre boîte e-mail personnelle !');">
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Nom & Prénom</label>
+                        <input type="text" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Jost', sans-serif;" placeholder="Votre nom" required>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Adresse E-mail</label>
+                        <input type="email" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Jost', sans-serif;" placeholder="votre@email.com" required>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Votre Message</label>
+                        <textarea style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Jost', sans-serif; min-height: 120px;" placeholder="Comment pouvons-nous vous aider ?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; text-align: center;">Envoyer le message</button>
+                </form>
+            </div>
+            
+            <!-- Information & Map -->
+            <div style="display: flex; flex-direction: column; gap: 30px;">
+                <div>
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 28px; margin-bottom: 15px;">L'Atelier</h3>
+                    <p style="margin-bottom: 10px;">📍 12 Rue des Fleurs, 75011 Paris</p>
+                    <p style="margin-bottom: 10px;">📞 01 23 45 67 89</p>
+                    <p>✉️ contact@atelierfloral.fr</p>
+                </div>
+                <div class="map-container" style="height: 300px; margin: 0; border-radius: 4px; overflow: hidden; box-shadow: var(--shadow-subtile);">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.3767768!3d48.8583701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66df4f6645391%3A0x673c09b7c84523c0!2s11th%20Arrondissement%2C%20Paris%2C%20France!5e0!3m2!1sen!2sfr!4v1700000000000!5m2!1sen!2sfr" allowfullscreen="" loading="lazy" style="width: 100%; height: 100%; border: 0;"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <footer>
         <div class="footer-grid">
