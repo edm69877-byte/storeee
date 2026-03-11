@@ -766,6 +766,22 @@
                 grid-template-columns: 1fr !important;
             }
         }
+    
+        /* Dynamic Header Colors */
+        header .logo, header .nav-item {
+            color: white !important;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+            transition: var(--transition);
+        }
+        header.scrolled .logo, header.scrolled .nav-item {
+            color: var(--noir) !important;
+            text-shadow: none;
+        }
+        header .hamburger div { background: white; transition: var(--transition); }
+        header.scrolled .hamburger div { background: var(--noir); }
+        .logo::after { background: white; }
+        header.scrolled .logo::after { background: var(--noir); }
+
     </style>
 </head>
 <body>
@@ -802,12 +818,7 @@
 
     <!-- Hero Section -->
     <section class="hero" id="accueil" style="padding: 0;">
-        <div class="hero-slider">
-            <div class="slide active" style="background-image: url('photos/hero-1.jpg')"></div>
-            <div class="slide" style="background-image: url('photos/hero-2.jpg')"></div>
-            <div class="slide" style="background-image: url('photos/hero-3.jpg')"></div>
-            <div class="slide" style="background-image: url('photos/hero-4.jpg')"></div>
-            <div class="slide" style="background-image: url('photos/hero-5.jpg')"></div>
+        <div class="hero-slider" style="background: url('photos/hero-5.jpg') center/cover no-repeat;">
         </div>
         <div class="hero-overlay">
             <h1 class="hero-title">L'art floral parisien</h1>
@@ -816,12 +827,6 @@
                 <a href="gallery.html" class="btn btn-primary">Découvrir nos créations</a>
                 <a class="btn btn-outline" onclick="showDemoModal('💬 Mode démo · Sur votre site : commande WhatsApp instantanée');">Commander sur WhatsApp</a>
             </div>
-            <div class="hero-dots">
-                <div class="dot active"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
             </div>
         </div>
     </section>
