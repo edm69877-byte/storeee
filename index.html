@@ -740,6 +740,26 @@
 
         .hamburger { display: none; }
         .hamburger div { width: 25px; height: 2px; background: var(--noir); margin: 6px 0; }
+    
+        @media (max-width: 992px) {
+            header nav {
+                display: none; /* Hide by default on mobile */
+                flex-direction: column;
+                background: white;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                box-shadow: var(--shadow-subtile);
+                padding: 20px 0;
+            }
+            header nav.mobile-nav-visible {
+                display: flex; /* Show when active */
+            }
+            .header-main .logo { margin-bottom: 0; }
+            .nav-item { padding: 10px 0; border-bottom: 1px solid var(--rose); }
+            .nav-item:last-child { border-bottom: none; }
+        }
     </style>
 </head>
 <body>
@@ -849,7 +869,7 @@
             </div>
             <div class="comp-card comp-after">
                 <span class="badge badge-green">Avec DigitalFR</span>
-                <div class="wix-mockup" style="background: url('photos/atelier-1.jpg') center; background-size: cover;">
+                <div class="wix-mockup" style="background: url('photos/boutique.jpg') center; background-size: cover;">
                     <div style="background: rgba(0,0,0,0.3); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">L'ATELIER FLORAL</div>
                 </div>
                 <h3 class="comp-title">Après</h3>
@@ -974,35 +994,35 @@
         <div class="review-slider">
             <!-- Avis 1 -->
             <div class="review-slide active">
-                <img src="photos/boutique.jpg" class="rev-avatar">
+                <img src="photos/avis-1.jpg" class="rev-avatar">
                 <h4 class="rev-name">Léa Martin</h4>
                 <p class="rev-location">Le Marais, Paris</p>
                 <p class="rev-text">"Un bouquet absolument somptueux reçu pour mon anniversaire. Les fleurs ont tenu plus de 10 jours, une qualité rare !"</p>
             </div>
             <!-- Avis 2 -->
             <div class="review-slide">
-                <img src="photos/insta-1.jpg" class="rev-avatar">
+                <img src="photos/avis-2.jpg" class="rev-avatar">
                 <h4 class="rev-name">Thomas Bernard</h4>
                 <p class="rev-location">Saint-Germain, Paris</p>
                 <p class="rev-text">"La commande via WhatsApp est d'une simplicité déconcertante. Réponse rapide et bouquet sur mesure parfait."</p>
             </div>
             <!-- Avis 3 -->
             <div class="review-slide">
-                <img src="photos/insta-2.jpg" class="rev-avatar">
+                <img src="photos/avis-3.jpg" class="rev-avatar">
                 <h4 class="rev-name">Sophie Laurent</h4>
                 <p class="rev-location">Bastille, Paris</p>
                 <p class="rev-text">"L'Atelier Floral a réalisé la décoration de notre mariage. Tout était divin, élégant et raffiné."</p>
             </div>
             <!-- Avis 4 -->
             <div class="review-slide">
-                <img src="photos/insta-3.jpg" class="rev-avatar">
+                <img src="photos/avis-4.jpg" class="rev-avatar">
                 <h4 class="rev-name">Julien Roux</h4>
                 <p class="rev-location">Canal St-Martin, Paris</p>
                 <p class="rev-text">"Service de livraison impeccable en 2h chrono. Le bouquet était encore plus beau que sur les photos."</p>
             </div>
             <!-- Avis 5 -->
             <div class="review-slide">
-                <img src="photos/insta-4.jpg" class="rev-avatar">
+                <img src="photos/avis-5.jpg" class="rev-avatar">
                 <h4 class="rev-name">Emma Petit</h4>
                 <p class="rev-location">Montmartre, Paris</p>
                 <p class="rev-text">"Une boutique avec une âme. On sent la passion dans chaque composition. Ma fleuriste préférée à Paris."</p>
@@ -1019,25 +1039,25 @@
         <h2 class="section-title">Suivez notre quotidien floral</h2>
         <div class="insta-grid">
             <div class="insta-item" onclick="showDemoModal('📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct');">
-                <img src="photos/insta-5.jpg" alt="Insta">
+                <img src="photos/insta-1.jpg" alt="Insta">
                 <div class="insta-overlay">
                     <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 </div>
             </div>
             <div class="insta-item" onclick="showDemoModal('📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct');">
+                <img src="photos/insta-2.jpg" alt="Insta">
+            </div>
+            <div class="insta-item" onclick="showDemoModal('📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct');">
+                <img src="photos/insta-3.jpg" alt="Insta">
+            </div>
+            <div class="insta-item" onclick="showDemoModal('📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct');">
+                <img src="photos/insta-4.jpg" alt="Insta">
+            </div>
+            <div class="insta-item" onclick="showDemoModal('📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct');">
+                <img src="photos/insta-5.jpg" alt="Insta">
+            </div>
+            <div class="insta-item" onclick="showDemoModal('📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct');">
                 <img src="photos/insta-6.jpg" alt="Insta">
-            </div>
-            <div class="insta-item" onclick="showDemoModal('📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct');">
-                <img src="https://images.unsplash.com/photo-1523694553227-ecca17d465d0?w=400" alt="Insta">
-            </div>
-            <div class="insta-item" onclick="showDemoModal('📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct');">
-                <img src="https://images.unsplash.com/photo-1516533075015-a3838414c3ca?w=400" alt="Insta">
-            </div>
-            <div class="insta-item" onclick="showDemoModal('📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct');">
-                <img src="https://images.unsplash.com/photo-1550983092-246a241105e7?w=400" alt="Insta">
-            </div>
-            <div class="insta-item" onclick="showDemoModal('📸 Mode démo · Sur votre site : votre vrai feed Instagram en direct');">
-                <img src="https://images.unsplash.com/photo-1512423377726-21376839352e?w=400" alt="Insta">
             </div>
         </div>
         <div style="text-align: center;">
@@ -1208,25 +1228,7 @@
             nav.classList.toggle('mobile-nav-visible');
         });
         
-        @media (max-width: 992px) {
-            header nav {
-                display: none; /* Hide by default on mobile */
-                flex-direction: column;
-                background: white;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                box-shadow: var(--shadow-subtile);
-                padding: 20px 0;
-            }
-            header nav.mobile-nav-visible {
-                display: flex; /* Show when active */
-            }
-            .header-main .logo { margin-bottom: 0; }
-            .nav-item { padding: 10px 0; border-bottom: 1px solid var(--rose); }
-            .nav-item:last-child { border-bottom: none; }
-        }
+
     </script>
 </body>
 </html>
