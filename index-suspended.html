@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site temporairement suspendu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg:#080810; --primary:#7B6EF6; --gold:#C9A84C; --white:#F0F0FF; --gray:#6B6B8A; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(123,110,246,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .wrap { max-width: 520px; }
+        .icon {
+            width: 80px; height: 80px;
+            background: rgba(248,113,113,0.1);
+            border: 1px solid rgba(248,113,113,0.2);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 30px;
+        }
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+        p {
+            color: #9090B0;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 12px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .btn:hover { background: #6A5DE8; transform: translateY(-1px); }
+        .footer {
+            margin-top: 50px;
+            font-size: 0.78rem;
+            color: #444;
+        }
+        .footer a { color: #666; text-decoration: none; }
+        .footer a:hover { color: var(--white); }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="icon">⏸</div>
+        <h1>Ce site est temporairement suspendu</h1>
+        <p>Ce site vitrine est momentanément indisponible.<br>Si vous êtes le propriétaire, contactez DigitalFR pour régulariser votre situation.</p>
+        <a href="https://digitalfr.online" class="btn">
+            Contacter DigitalFR →
+        </a>
+        <div class="footer">
+            Site hébergé par <a href="https://digitalfr.online">DigitalFR</a>
+        </div>
+    </div>
+</body>
+</html>
